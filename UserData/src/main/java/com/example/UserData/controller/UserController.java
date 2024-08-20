@@ -49,4 +49,9 @@ public class UserController {
     public void updateUserEmails(@RequestBody List<User> users){
         userService.updateUserEmails(users);
     }
+
+    @GetMapping("/all")
+    public List<User> getAllUsers(){
+        return userService.findAll();
+    }
 }
