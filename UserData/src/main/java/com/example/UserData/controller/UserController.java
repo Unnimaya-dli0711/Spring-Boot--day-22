@@ -3,6 +3,7 @@ package com.example.UserData.controller;
 import com.example.UserData.model.User;
 import com.example.UserData.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,11 +18,20 @@ public class UserController {
         userService.addUser(user);
     }
     @GetMapping ("/{id}")
-    public User findById(@PathVariable long id){
+    public User findById(@PathVariable Long id){
         return userService.findUser(id);
     }
     @PutMapping("/{id}/email")
-    public void updateUserMail(@PathVariable long id,@RequestBody String newEmail){
+    public void updateUserMail(@PathVariable Long id,@RequestBody String newEmail){
         userService.updateUserEmail(id,newEmail);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
