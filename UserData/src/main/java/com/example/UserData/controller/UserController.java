@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -17,10 +19,12 @@ public class UserController {
     {
         userService.addUser(user);
     }
+
     @GetMapping ("/{id}")
     public User findById(@PathVariable Long id){
         return userService.findUser(id);
     }
+
     @PutMapping("/{id}/email")
     public void updateUserMail(@PathVariable Long id,@RequestBody String newEmail){
         userService.updateUserEmail(id,newEmail);
@@ -33,5 +37,11 @@ public class UserController {
         }
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/addmultiple")
+    public void addUserBatch(@RequestBody List<User> users)
+    {
+        userService.addUserBatch(users);
     }
 }

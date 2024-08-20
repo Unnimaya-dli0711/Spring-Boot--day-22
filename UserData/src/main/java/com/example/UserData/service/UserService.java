@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -26,4 +28,5 @@ public class UserService {
         userRepository.deleteById(id);
         logger.info("User with ID: " + id + " deleted successfully.");
     }
+    public void addUserBatch(List<User> users){userRepository.saveAll(users);}
 }
