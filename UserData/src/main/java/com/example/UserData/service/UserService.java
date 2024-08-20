@@ -34,7 +34,12 @@ public class UserService {
             userRepository.findById(user.getId()).ifPresent(existingUser->{
                 existingUser.setEmail(user.getEmail());
                 userRepository.save(existingUser);
+
             });
         }
+    }
+
+    public List<User> findAll(){
+       return userRepository.findAll();
     }
 }
