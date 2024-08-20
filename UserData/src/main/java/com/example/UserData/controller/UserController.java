@@ -20,4 +20,8 @@ public class UserController {
     public User findById(@PathVariable long id){
         return userService.findUser(id);
     }
+    @PutMapping("/{id}/email")
+    public void updateUserMail(@PathVariable long id,@RequestBody String newEmail){
+        userService.updateUserEmail(id,newEmail);
+    }
 }

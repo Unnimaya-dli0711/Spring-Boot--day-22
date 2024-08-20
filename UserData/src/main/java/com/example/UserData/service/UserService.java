@@ -15,4 +15,7 @@ public class UserService {
     public User findUser(Long id){
         return userRepository.findById(id).orElse(null);
     }
+    public void updateUserEmail(long id,String newEmail){
+        userRepository.updateUserEmailById(id,newEmail);
+    }
 }
