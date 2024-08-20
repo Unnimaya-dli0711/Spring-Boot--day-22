@@ -16,4 +16,8 @@ public class UserController {
     {
         userService.addUser(user);
     }
+    @GetMapping ("/{id}")
+    public User findById(@PathVariable long id){
+        return userService.findUser(id);
+    }
 }
