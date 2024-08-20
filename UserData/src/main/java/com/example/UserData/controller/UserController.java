@@ -54,4 +54,8 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.findAll();
     }
+    @GetMapping("/by-domain")
+    public List<User> findByDomain(@RequestParam String domain){
+        return userService.findByDomain(domain);
+    }
 }
