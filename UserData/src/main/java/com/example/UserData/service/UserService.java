@@ -29,4 +29,12 @@ public class UserService {
         logger.info("User with ID: " + id + " deleted successfully.");
     }
     public void addUserBatch(List<User> users){userRepository.saveAll(users);}
+    public void updateUserEmails(List<User>users){
+        for(User user:users){
+            userRepository.findById(user.getId()).ifPresent(existingUser->{
+                existingUser.setEmail(user.getEmail());
+                userRepository.save(existingUser);
+            });
+        }
+    }
 }

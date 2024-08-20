@@ -44,4 +44,9 @@ public class UserController {
     {
         userService.addUserBatch(users);
     }
+
+    @PatchMapping("/update-emails")
+    public void updateUserEmails(@RequestBody List<User> users){
+        userService.updateUserEmails(users);
+    }
 }
