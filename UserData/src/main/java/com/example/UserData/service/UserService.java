@@ -44,4 +44,8 @@ public class UserService {
     public List<User> findByDomain(String domain){
         return userRepository.findByEmailDomain(domain);
     }
+
+    public int findCount(){
+        return (int) userRepository.count();
+    }
 }

@@ -58,4 +58,8 @@ public class UserController {
     public List<User> findByDomain(@RequestParam String domain){
         return userService.findByDomain(domain);
     }
+    @GetMapping("/count")
+    public int findCount(){
+        return userService.findCount();
+    }
 }
