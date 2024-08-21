@@ -1,8 +1,10 @@
 package com.example.UserData.controller;
 
 import com.example.UserData.model.User;
+import com.example.UserData.service.CustomException;
 import com.example.UserData.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ public class UserController {
     @PostMapping
     public void addUser(@RequestBody User user)
     {
-        userService.addUser(user);
+        userService.addUserWithExceptionHandling(user);
     }
 
     @GetMapping ("/{id}")
@@ -62,4 +64,9 @@ public class UserController {
     public int findCount(){
         return userService.findCount();
     }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<String> handleCustomException(CustomException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+}
 }

@@ -4,6 +4,8 @@ import com.example.UserData.model.User;
 import com.example.UserData.repository.UserRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 
@@ -47,5 +49,16 @@ public class UserService {
 
     public int findCount(){
         return (int) userRepository.count();
+    }
+
+    public void addUserWithExceptionHandling(User user){
+        try{
+            if(userRepository.findById(user.getId())==null)
+                userRepository.save(user);
+            else
+                throw new CustomException("Key Duplicated");
+        }catch (DuplicateKeyException e){
+            System.out.println(e);
+        }
     }
 }
